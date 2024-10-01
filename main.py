@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -6,6 +7,7 @@ from asteroidfield import AsteroidField
 
 def main():
   pygame.init()
+  #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
   screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
   clock = pygame.time.Clock()
 
@@ -30,6 +32,11 @@ def main():
 
     for obj in updatable:
       obj.update(dt)
+
+    for asteroid in asteroids:
+      if asteroid.collides_with(player):
+         print("Game over!")
+         sys.exit()
 
     screen.fill("black")
 
